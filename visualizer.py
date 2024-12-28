@@ -119,6 +119,22 @@ def insertion_sort(draw_info, ascending=True):
         
     return lst
 
+def selection_sort(draw_info, ascending = True):
+    lst = draw_info.lst
+
+    for index in range(len(lst) - 1):
+        min = index
+        for j in range(index + 1, len(lst)):
+            if (lst[j] < lst[min] and ascending) or (lst[j] > lst[min] and not ascending):
+                min = j
+        (lst[index], lst[min]) = (lst[min], lst[index])
+        draw_list(draw_info, {index: draw_info.GREEN, min: draw_info.RED}, True)
+        yield True
+    
+    return lst
+
+            
+
 def main():
     run = True
     clock = pygame.time.Clock()
@@ -178,6 +194,11 @@ def main():
             elif event.key == pygame.K_i and not sorting:
                 sorting_algorithm = insertion_sort
                 sorting_algo_name = "Insertion Sort"
+            
+            elif event.key == pygame.K_s and not sorting:
+                sorting_algorithm = selection_sort
+                sorting_algo_name = "Selection Sort"
+                
 
     pygame.quit()
 
