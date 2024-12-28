@@ -34,7 +34,7 @@ class DrawInformation:
         self.max_val = max(lst)
         
         self.block_width = round((self.width - self.SIDE_PAD) / len(lst))
-        self.block_height = round((self.height - self.TOP_PAD) / (self.max_val - self.min_val))
+        self.block_height = math.floor((self.height - self.TOP_PAD) / (self.max_val - self.min_val))
         self.start_x = self.SIDE_PAD // 2
 
 def generate_starting_list(n, min_val, max_val):
@@ -62,8 +62,7 @@ def draw_list(draw_info, color_positions={}, clear_bg = False):
     lst = draw_info.lst
     
     if clear_bg:
-        clear_rect = (draw_info.SIDE_PAD//2, draw_info.TOP_PAD, draw_info.width - draw_info.SIDE_PAD, 
-                        draw_info.height - draw_info.TOP_PAD)
+        clear_rect = (draw_info.SIDE_PAD//2, draw_info.TOP_PAD, draw_info.width - draw_info.SIDE_PAD, draw_info.height)
         pygame.draw.rect(draw_info.window, draw_info.BACKGROUND_COLOR, clear_rect)
 
     for i, val in enumerate(lst):
@@ -90,7 +89,7 @@ def bubble_sort(draw_info, ascending=True):
             
             if (num1 > num2 and ascending) or (num1 < num2 and not ascending):
                 lst[j], lst[j + 1] = lst[j + 1], lst[j]
-                draw_list(draw_info, {j:draw_info.GREEN, j + 1: draw_info.RED})
+                draw_list(draw_info, {j:draw_info.GREEN, j + 1: draw_info.RED}, True)
                 yield True
 
     return lst
