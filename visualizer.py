@@ -54,6 +54,8 @@ def main():
     while run:
         clock.tick(60)
 
+        draw(draw_info)
+
         pygame.display.update()
 
         for event in pygame.event.get():
@@ -61,6 +63,11 @@ def main():
                 run = False
 
     pygame.quit()
+
+def draw(draw_info):
+    draw_info.window.fill(draw_info.BACKGROUND_COLOR)
+    pygame.display.update()
+
 
 if __name__ == "__main__":
     main()
