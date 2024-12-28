@@ -115,7 +115,13 @@ def main():
     while run:
         clock.tick(60)
 
-        draw(draw_info)
+        if sorting:
+            try:
+                next(sorting_algorithm_generator)
+            except StopIteration:
+                sorting = False
+        else:
+            draw(draw_info)
 
         pygame.display.update()
 
