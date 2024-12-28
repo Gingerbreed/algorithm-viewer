@@ -108,6 +108,10 @@ def main():
     sorting = False
     ascending = True
 
+    sorting_algorithm = bubble_sort
+    sorting_algo_name = "Bubble Sort"
+    sorting_algorithm_generator = None
+
     while run:
         clock.tick(60)
 
@@ -128,13 +132,17 @@ def main():
                 sorting = False
             
             elif event.key == pygame.K_SPACE and sorting == False:
-                sorting = True 
+                sorting = True
+                sorting_algorithm_generator = sorting_algorithm(draw_info, ascending)
 
             elif event.key == pygame.K_a and not sorting:
                 ascending = True
             
             elif event.key == pygame.K_d and not sorting:
                 ascending = False
+            
+            elif event.key == pygame.K_b and not sorting:
+                sorting_algorithm = bubble_sort
 
     pygame.quit()
 
